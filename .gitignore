@@ -1,2 +1,4 @@
 logs/*
 documents/data/*
+.vscode
+lib/__pycache__/
