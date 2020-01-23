@@ -187,14 +187,17 @@ with yaspin(Spinners.earth, text="Minhashing", color="yellow") as spinner:
     for hash_values in permutated_columns:
         found = 0
         min = 0
-        minhash_to_add = [0] * len(document_columns)
+        minhash_to_add = [-1] * len(document_columns)
         while found < 3:
             for i, hash_value in enumerate(hash_values):
                 if hash_value == min:
                     for y, doc in enumerate(document_columns):
                         if doc[i] == 1:
-                            minhash_to_add[y] = hash_value
-                            found+=1
+                            if minhash_to_add[y] < 0:
+                                minhash_to_add[y] = hash_value
+                                found+=1
+                            else:
+                                continue
             min+=1
         minhash.append(minhash_to_add)
 
